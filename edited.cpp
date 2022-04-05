@@ -360,19 +360,30 @@ for( int row = 0; row < SIZE/2 ; row++){
 void enlarge()
 {
     load1();
+ int option;
+
      cout << " for enlarging the left part press (1) for enlarging the right part press (2)"<<endl;
     cout << " for enlarging the upper part press (3)for enlarging the lower part press (4)"<<endl;
+cin >> option;
 
-    int option;
-     cin >> option;
     if(option == 1)
     {
 
-          for( int row = 0; row < SIZE/2 ; row+2){
-    for(int col =0 ; col < SIZE/2 ; col+2){
-    image[row+1][col] = image1[row][col];
+          for( int row = 0; row < SIZE/2 ; row++){
+            for(int col =0 ; col < SIZE/2 ; col++){
+                for(int row2 = 0; row < SIZE ; row2+=2 ){
+                    for(int col2 =0 ; col2 < SIZE ; col2+=2){
+
+    image[row2][col2] = image1[row][col];
+    image[row2+1][col2] = image1[row][col];
     image[row+1][col+1] = image1[row][col];
     image[row][col+1] = image1[row][col];
+
+                    }
+
+
+    }
+
 
     }
 
