@@ -16,6 +16,8 @@ void Black_White_Filter();
 void Invert_Image();
 void Merge();
 void Rotate_img();
+void Rotate_img1();
+void Rotate_img2();
 void flip_h();
 void flip_v();
 void darken();
@@ -84,8 +86,27 @@ int main ()
             flip_v();
           }
       }
-    //  else if (option == '5')
-    //  {}
+     else if (option == '5')
+     {
+         load1();
+         cout << "for rotating 90 deg press (1) for 180 deg press (2) and for 270 deg press(3)"<<endl;
+         cin >> option1 ;
+         if(option1 == 1)
+         {
+             Rotate_img();
+         }
+         else if(option1 == 2)
+         {
+             Rotate_img2();
+         }
+         else if(option1 == 3)
+         {
+             Rotate_img1();
+         }
+         save();
+
+
+     }
       else if (option == '6')
       {
           cout<<"for darken press (1) and for lighten press (2)"<<endl;
@@ -214,17 +235,35 @@ for( int row = 0; row < SIZE ; row++){
 save();
 }
 
-/*void Rotate_img()
+void Rotate_img()
 {
-    for( int row = 0; row < SIZE ; row++){
-    for(int col =0 ; col < SIZE ; col++){
-        if((row < 128) && (col < 128)){
-            image = image
+    for(int row =0 ; row < SIZE ;row ++){
+        for(int col = 0 ; col < SIZE ; col++){
+            image[row][col]=image1[255-col][row];
         }
     }
 
 }
-}*/
+
+void Rotate_img1()
+{
+    for(int row =0 ; row < SIZE ;row ++){
+        for(int col = 0 ; col < SIZE ; col++){
+            image[row][col]=image1[col][255-row];
+        }
+    }
+
+}
+
+void Rotate_img2()
+{
+    for(int row =0 ; row < SIZE ;row ++){
+        for(int col = 0 ; col < SIZE ; col++){
+            image[row][col]=image1[255-row][255-col];
+        }
+    }
+}
+
 
 void flip_h()
 {
