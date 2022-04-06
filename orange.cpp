@@ -1,11 +1,14 @@
 #include <iostream>
 #include <string>
 #include <fstream>
+#include  <stdlib.h>
 #include <cstring>
 #include <cmath>
 #include "bmplib.h"
 #include "bmplib.cpp"
 using namespace std ;
+// functions , arrays and constants used globally in the programe
+
 void display_menu();
 void load();
 void load1();
@@ -24,10 +27,15 @@ void mirror ();
 void enlarge();
 unsigned char image[SIZE][SIZE];
 unsigned char image1[SIZE][SIZE];
+
 int main ()
 {
     load();
+    while (1)
+    {
     display_menu();
+    
+    }
     cout<<endl;
 
 
@@ -43,7 +51,7 @@ int main ()
      int option1;
 
      {
-     cout<<"choose a filter to apply  : "<<endl;
+     cout<<"choose a filter to apply or 0 to exit : "<<endl;
      cout<<"1- Black & White Filter"<<endl;
      cout<<"2- Invert Filter"<<endl;
      cout<<"3- Merge Filter" <<endl;
@@ -113,9 +121,14 @@ int main ()
     //  {}
     //  else if (option == 'c')
     //  {}
-    //  else if (option == 0)
-    //  {
-    //  }
+     else if (option == 's')
+     {
+         save();
+     }
+     else if (option == '0')
+     {
+        exit(0);
+     }
      }
 
 
@@ -188,7 +201,7 @@ void Black_White_Filter()
            }
         }
     }
-    save();
+    // save();
 }
 
 void Invert_Image()
@@ -200,7 +213,7 @@ for( int row = 0; row < SIZE ; row++){
     }
 
 }
-save();
+// save();
 
 }
 void Merge()
@@ -211,7 +224,7 @@ for( int row = 0; row < SIZE ; row++){
     }
 
 }
-save();
+// save();
 }
 
 /*void Rotate_img()
@@ -240,7 +253,7 @@ void flip_h()
     }
 
 }
-save();
+// save();
 }
 
 void flip_v()
@@ -258,7 +271,7 @@ void flip_v()
     }
 
 }
-save();
+// save();
 }
 
 void darken()
@@ -272,7 +285,7 @@ void darken()
 
 
 }
-save();
+// save();
 }
 
 void lighten()
@@ -296,7 +309,7 @@ void lighten()
 
 
 }
-save();
+// save();
 }
 
 void mirror()
@@ -354,18 +367,20 @@ for( int row = 0; row < SIZE/2 ; row++){
 
 }
       }
-      save();
+    //   save();
 }
 
 void enlarge()
 {
+    int part;
     load1();
-     cout << " for enlarging the left part press (1) for enlarging the right part press (2)"<<endl;
-    cout << " for enlarging the upper part press (3)for enlarging the lower part press (4)"<<endl;
-
-    int option;
-     cin >> option;
-    if(option == 1)
+    cout<<"which part you want to enlarge : "<<endl;
+    cout<<" 1   2 "<<endl;
+    cout<<" __|__ "<<endl;   
+    cout<<" 3 | 4 "<<endl;
+    
+    cin >> part;
+    if(part == 1)
     {
 
           for( int row = 0; row < SIZE/2 ; row+2){
@@ -379,11 +394,34 @@ void enlarge()
 
 }
     }
-    //  else if (option == '7')
-    //  {}
-    //  else if (option == '8')
-    //  {}
-    //  else if (option == '9')
-    //  {}
-    save();
+     else if (part == 2)
+     {
+          for( int row = 0; row < SIZE/2 ; row+2){
+    for(int col = SIZE/2 ; col < SIZE ; col+2){
+    image[row+1][col] = image1[row][col];
+    image[row+1][col+1] = image1[row][col];
+    image[row][col+1] = image1[row][col];
+     }
+          }
+     }
+      else if (part == 3)
+     {
+          for( int row =SIZE/2; row < SIZE ; row+2){
+    for(int col = 0 ; col < SIZE/2; col+2){
+    image[row+1][col] = image1[row][col];
+    image[row+1][col+1] = image1[row][col];
+    image[row][col+1] = image1[row][col];
+     }
+          }
+     } else if (part == 4)
+     {
+          for( int row = SIZE/2; row < SIZE ; row+2){
+    for(int col = SIZE/2 ; col < SIZE ; col+2){
+    image[row+1][col] = image1[row][col];
+    image[row+1][col+1] = image1[row][col];
+    image[row][col+1] = image1[row][col];
+     }
+          }
+     }
+    
 }
