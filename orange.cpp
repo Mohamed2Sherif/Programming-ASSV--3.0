@@ -107,10 +107,10 @@ int main ()
       }
     //  else if (option == '7')
     //  {}
-      else if (option == '8')
-      {
-           enlarge();
-      }
+    //   else if (option == '8')
+    //   {
+    //        enlarge();
+    //   }
     //  else if (option == '9')
     //  {}
       else if (option == 'a')
@@ -370,58 +370,58 @@ for( int row = 0; row < SIZE/2 ; row++){
     //   save();
 }
 
-void enlarge()
-{
-    int part;
-    load1();
-    cout<<"which part you want to enlarge : "<<endl;
-    cout<<" 1   2 "<<endl;
-    cout<<" __|__ "<<endl;   
-    cout<<" 3 | 4 "<<endl;
+// void enlarge()
+// {
+//     int part;
+//     load1();
+//     cout<<"which part you want to enlarge : "<<endl;
+//     cout<<" 1   2 "<<endl;
+//     cout<<" __|__ "<<endl;   
+//     cout<<" 3 | 4 "<<endl;
     
-    cin >> part;
-    if(part == 1)
-    {
+//     cin >> part;
+//     if(part == 1)
+//     {
 
-          for( int row = 0; row < SIZE/2 ; row+2){
-    for(int col =0 ; col < SIZE/2 ; col+2){
-    image[row+1][col] = image1[row][col];
-    image[row+1][col+1] = image1[row][col];
-    image[row][col+1] = image1[row][col];
+//           for( int row = 0; row < SIZE/2 ; row+2){
+//     for(int col =0 ; col < SIZE/2 ; col+2){
+//     image[row+1][col] = image1[row][col];
+//     image[row+1][col+1] = image1[row][col];
+//     image[row][col+1] = image1[row][col];
 
-    }
+//     }
 
 
-}
-    }
-     else if (part == 2)
-     {
-          for( int row = 0; row < SIZE/2 ; row+2){
-    for(int col = SIZE/2 ; col < SIZE ; col+2){
-    image[row+1][col] = image1[row][col];
-    image[row+1][col+1] = image1[row][col];
-    image[row][col+1] = image1[row][col];
-     }
-          }
-     }
-      else if (part == 3)
-     {
-          for( int row =SIZE/2; row < SIZE ; row+2){
-    for(int col = 0 ; col < SIZE/2; col+2){
-    image[row+1][col] = image1[row][col];
-    image[row+1][col+1] = image1[row][col];
-    image[row][col+1] = image1[row][col];
-     }
-          }
-     } else if (part == 4)
-     {
-          for( int row = SIZE/2; row < SIZE ; row+2){
-    for(int col = SIZE/2 ; col < SIZE ; col+2){
-    image[row+1][col] = image1[row][col];
-    image[row+1][col+1] = image1[row][col];
-    image[row][col+1] = image1[row][col];
-     }
-          }
-     }
+// }
+//     }
+//      else if (part == 2)
+//      {
+//           for( int row = 0; row < SIZE/2 ; row+2){
+//     for(int col = SIZE/2 ; col < SIZE ; col+2){
+//     image[row+1][col] = image1[row][col];
+//     image[row+1][col+1] = image1[row][col];
+//     image[row][col+1] = image1[row][col];
+//      }
+//           }
+//      }
+//       else if (part == 3)
+//      {
+//           for( int row =SIZE/2; row < SIZE ; row+2){
+//     for(int col = 0 ; col < SIZE/2; col+2){
+//     image[row+1][col] = image1[row][col];
+//     image[row+1][col+1] = image1[row][col];
+//     image[row][col+1] = image1[row][col];
+//      }
+//           }
+//      } else if (part == 4)
+//      {
+//           for( int row = SIZE/2; row < SIZE ; row+2){
+//     for(int col = SIZE/2 ; col < SIZE ; col+2){
+//     image[row+1][col] = image1[row][col];
+//     image[row+1][col+1] = image1[row][col];
+//     image[row][col+1] = image1[row][col];
+//      }
+//           }
+//      }
     
-}
+// }
