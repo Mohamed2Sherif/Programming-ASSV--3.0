@@ -221,17 +221,17 @@ void Black_White_Filter()
     {
         for (int col =0 ; col <SIZE; col++)
         {
-           if (image[row][col] > Average())
+           if (image[row][col] > 128)
            {
                image[row][col] =255;
            }
-           else if (image[row][col] < Average())
+           else if (image[row][col] < 128)
            {
                image[row][col] =0;
            }
         }
     }
-    // save();
+    
 }
 
 void Invert_Image()
