@@ -8,12 +8,11 @@
 #include "bmplib.h"
 #include "bmplib.cpp"
 using namespace std ;
-// functions , arrays and constants used globally in the programe
-
 void display_menu();
 void load();
 void load1();
 void save();
+void Blur();
 const int COUNT = 256 *256;
 double Average();
 void Black_White_Filter();
@@ -35,17 +34,17 @@ void detectE();
 unsigned char image[SIZE][SIZE];
 unsigned char image1[SIZE][SIZE];
 
-// int main ()
-// {
-//     load();
-//     while (1)
-//     {
-//     display_menu();
+int main ()
+{
+    load();
+    while (1)
+    {
+    display_menu();
     
-//     }
-//     cout<<endl;
+    }
+    cout<<endl;
 
-//  }
+ }
 
 
  void display_menu()
@@ -147,8 +146,10 @@ unsigned char image1[SIZE][SIZE];
      {
          mirror();
      }
-    //  else if (option == 'b')
-    //  {}
+     else if (option == 'b')
+     {
+         Shuffle();
+     }
     //  else if (option == 'c')
     //  {}
      else if (option == 's')
@@ -256,18 +257,6 @@ for( int row = 0; row < SIZE ; row++){
 }
 // save();
 }
-
-/*void Rotate_img()
-{
-    for( int row = 0; row < SIZE ; row++){
-    for(int col =0 ; col < SIZE ; col++){
-        if((row < 128) && (col < 128)){
-            image = image
-        }
-    }
-
-}
-}*/
 
 void flip_h()
 {
@@ -595,16 +584,92 @@ void Rotate_img2()
         }
     }
 }
+void Blur()
+{
+     for ( int row =0 ; row <SIZE; row++)
+    {
+        for (int col =0 ; col <SIZE; col++)
+        {
 
+            image[row][col] = (image[row][col] + image[row-1][col-1] + image[row-1][col] + image[row-1][col+1] + image[row][col-1] + image[row][col+1] +image[row+1][col-1] + image[row+1][col] + image[row+1][col+1])/9;
+
+}
+    }
+
+}
 void Shuffle()
 {   
-    cout<<"Enter parts by the sequence you want : ";
-    int sequ[4];
-    int part;
-    for (int range =0 ; range < 3; range++)
-    {   
-        cin>>part;
-        cout<<"/";
-
+    for (int ro =0; ro < SIZE;ro++)
+    {
+        for(int co =0; co<SIZE; co++)
+        {
+            image1[ro][co]=image[ro][co];
+        }
     }
+for (int ro =0; ro < SIZE;ro++)
+    {
+        for(int co =0; co<SIZE; co++)
+        {
+           image[ro][co]=0;
+        }
+    }
+     cout<<"Enter parts by the sequence you want : "<<endl;
+    int sequ[4];
+    int m=0,n=0,row=0,col=0 ;
+    for (int range =0 ; range < 4; range++)
+    {   
+        cin>>sequ[range];
+        
+    }
+        int parts[4] = {1,2,3,4};
+        int rowbegin,colbegin;
+    for (int range =0 ; range < 4; range++)
+    {           
+         if ( parts[range] <= 2   ){
+            
+                    rowbegin = 0;
+            }
+            else {rowbegin=128;}
+            if (parts[range] %2 == 0)
+            {
+                        colbegin =128;
+            }
+            else {colbegin =0;}
+                int rowsize,colsize;     
+        if (rowbegin == 128 )
+        {
+                 rowsize=256;
+        }
+        else {rowsize =128;}
+         if(colbegin == 128)
+        {
+                colsize = 256;
+        }
+        else {colsize=128;}
+            m=0,n=0;
+            if ( sequ[range] <= 2   )
+            {
+                    row = 0;
+            }
+            else {row=128;}
+            if (sequ[range] %2 == 0)
+            {
+                        col =128;
+            }
+            else {col =0;}
+            
+    m =row;
+    for (int i =rowbegin ; i <rowsize; i++,m++)
+    {
+            n = col;
+            for(int j =colbegin; j <colsize; j++,n++)
+            {
+                    image[i][j]=image1[m][n];
+            }
+    }
+    }
+   
+   
+    
+    
 }

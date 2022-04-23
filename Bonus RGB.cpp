@@ -26,25 +26,16 @@ void Rotate_img2();
 void detectE();
 double Average();
 void mirror();
+void Merge();
+void lighten();
+void Shrink();
+void Shuffle();
+void Blur();
 int main ()
 {
     int option1;
    loadRGB();
-    load1();
-         cout << "for rotating 90 deg press (1) for 180 deg press (2) and for 270 deg press(3)"<<endl;
-         cin >> option1 ;
-         if(option1 == 1)
-         {
-             Rotate_img();
-         }
-         else if(option1 == 2)
-         {
-             Rotate_img2();
-         }
-         else if(option1 == 3)
-         {
-             Rotate_img1();
-         }
+   
    saveRGB();
 }
 void loadRGB()
@@ -294,9 +285,6 @@ void Rotate_img2()
         }
     }
 }
-
-
-
 void detectE()
 
 {
@@ -315,8 +303,6 @@ void detectE()
     }
     }
 }
-
-
 void enlarge()
 {
     int part;
@@ -414,4 +400,207 @@ void enlarge()
     }
           }
 
+}
+void Merge()
+
+{
+
+     for (int i = 0 ; i < SIZE ; i ++)
+   {
+       for (int j = 0 ; j < SIZE ; j ++)
+       {
+           for (int m = 0 ; m < RGB ; m ++)
+           {
+               image1[i][j][m] = (image[i][j][m]+image1[i][j][m]) / 2 ; 
+           }
+           
+       }
+   }  
+}
+void lighten()
+{
+
+    double temp;
+     for( int row = 0; row < SIZE ; row++){
+    for(int col =0 ; col < SIZE ; col++){
+        for (int k =0 ; k < RGB; k++)
+        {
+            temp = image[row][col][k] ;
+
+            temp *= 1.5;
+            if (temp > 255){
+             image[row][col][k] = 255;
+
+            }
+            else {
+                image[row][col][k] = temp;
+            }
+
+        }     
+    }
+}
+}
+void Shrink()
+{
+     int option ;
+    cout<<"1-shrink to 1/2"<<endl;
+    cout<<"2-shrink to 1/3"<<endl;
+    cout<<"3-shrink to 1/4"<<endl;
+    cin>>option;
+    unsigned char imageshrink[SIZE][SIZE][RGB];
+    switch(option)
+    {
+        case 1 :
+{
+    for(int row = 0 ; row < SIZE; row+=1){
+    for ( int col = 0 ; col < SIZE ; col +=1)
+    {   for (int k = 0; k<RGB; k++){
+        imageshrink[row][col][k] = image[row][col][k];
+    }}}
+    for(int row = 0 ; row < SIZE; row+=1){
+    for ( int col = 0 ; col < SIZE ; col +=1)
+    {   for (int k =0 ; k<RGB;k++){
+        image[row][col][k] = 0;
+    }}}
+    for(int row = 0 ; row < SIZE; row+=2){
+    for ( int col = 0 ; col < SIZE ; col +=2)
+    {   for (int k =0 ; k<RGB;k++){
+        image[row/2][col/2][k] = (imageshrink[row][col][k]+imageshrink[(row)+1][col][k]+imageshrink[row+1][col+1][k]+imageshrink[row][col+1][k])/4 ;
+    }}
+    }  
+}
+break;
+case 2 :
+for(int row = 0 ; row < SIZE; row+=1){
+    for ( int col = 0 ; col < SIZE ; col +=1)
+    {   
+       for (int k =0 ; k<RGB;k++)
+       {
+            imageshrink[row][col][k] = image[row][col][k];
+       }
+    }}
+    for(int row = 0 ; row < SIZE; row+=1){
+    for ( int col = 0 ; col < SIZE ; col +=1)
+    {   for (int k =0 ; k<RGB;k++){
+        image[row][col][k] =0;
+    }}}
+    for(int row = 0 ; row < SIZE; row+=3){
+    for ( int col = 0 ; col < SIZE ; col +=3)
+    {   for (int k =0 ; k<RGB;k++){
+        image[row/3][col/3][k] = (imageshrink[row][col][k]+imageshrink[row][col+1][k]+imageshrink[row+1][col][k])/3;
+    }}
+    break;}
+case 3:
+    for(int row = 0 ; row < SIZE; row+=1){
+    for ( int col = 0 ; col < SIZE ; col +=1)
+    {   for (int k = 0; k<RGB; k++){
+        imageshrink[row][col][k] = image[row][col][k];
+    }}}
+    for(int row = 0 ; row < SIZE; row+=1){
+    for ( int col = 0 ; col < SIZE ; col +=1)
+    {   for (int k =0 ; k<RGB;k++){
+        image[row][col][k] =0;
+    }}}
+    for(int row = 0 ; row < SIZE; row+=4){
+    for ( int col = 0 ; col < SIZE ; col +=4)
+    {   for (int k =0 ; k<RGB;k++){
+        image[row/4][col/4][k] = (imageshrink[row][col][k] + imageshrink[row-1][col-1][k] + imageshrink[row-1][col][k] + imageshrink[row-1][col+1][k] + imageshrink[row][col-1][k] + imageshrink[row][col+1][k] +imageshrink[row+1][col-1][k] + imageshrink[row+1][col][k] + imageshrink[row+1][col+1][k])/9;
+    }}}
+    break;
+    }
+}
+void Blur()
+{
+     for ( int row =0 ; row <SIZE; row++)
+    {
+        for (int col =0 ; col <SIZE; col++)
+        {
+            for(int k =0 ; k<RGB; k++)
+            image[row][col][k] = (image[row][col][k] + image[row-1][col-1][k] + image[row-1][col][k] + image[row-1][col+1][k] + image[row][col-1][k] + image[row][col+1][k] +image[row+1][col-1][k] + image[row+1][col][k] + image[row+1][col+1][k])/9;
+
+}
+    }
+
+}
+void Shuffle()
+{   
+    for (int ro =0; ro < SIZE;ro++)
+    {
+        for(int co =0; co<SIZE; co++)
+        {
+            for(int k =0; k <RGB; k++)
+            {
+            image1[ro][co][k]=image[ro][co][k];
+        }}
+    }
+for (int ro =0; ro < SIZE;ro++)
+    {
+        for(int co =0; co<SIZE; co++)
+        {
+            for(int k =0; k <RGB; k++)
+            {
+           image[ro][co][k]=0;
+        }
+    }}
+     cout<<"Enter parts by the sequence you want : "<<endl;
+    int sequ[4];
+    int m=0,n=0,row=0,col=0 ;
+    for (int range =0 ; range < 4; range++)
+    {   
+        cin>>sequ[range];
+        
+    }
+        int parts[4] = {1,2,3,4};
+        int rowbegin,colbegin;
+    for (int range =0 ; range < 4; range++)
+    {           
+         if ( parts[range] <= 2   ){
+            
+                    rowbegin = 0;
+            }
+            else {rowbegin=128;}
+            if (parts[range] %2 == 0)
+            {
+                        colbegin =128;
+            }
+            else {colbegin =0;}
+                int rowsize,colsize;     
+        if (rowbegin == 128 )
+        {
+                 rowsize=256;
+        }
+        else {rowsize =128;}
+         if(colbegin == 128)
+        {
+                colsize = 256;
+        }
+        else {colsize=128;}
+            m=0,n=0;
+            if ( sequ[range] <= 2   )
+            {
+                    row = 0;
+            }
+            else {row=128;}
+            if (sequ[range] %2 == 0)
+            {
+                        col =128;
+            }
+            else {col =0;}
+            
+    m =row;
+    for (int i =rowbegin ; i <rowsize; i++,m++)
+    {
+            n = col;
+            for(int j =colbegin; j <colsize; j++,n++)
+            {
+                for(int k =0; k <RGB; k++)
+            {
+                    image[i][j][k]=image1[m][n][k];
+            }}
+    }
+    }
+   
+   
+    
+    
 }
