@@ -31,6 +31,7 @@ void enlarge();
 void Shuffle();
 void Shrink();
 void detectE();
+void Blur();
 unsigned char image[SIZE][SIZE];
 unsigned char image1[SIZE][SIZE];
 
@@ -150,8 +151,10 @@ int main ()
      {
          Shuffle();
      }
-    //  else if (option == 'c')
-    //  {}
+     else if (option == 'c')
+     {
+         Blur();
+     }
      else if (option == 's')
      {
          save();

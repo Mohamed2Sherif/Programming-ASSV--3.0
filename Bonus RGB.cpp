@@ -24,6 +24,7 @@ void Rotate_img();
 void Rotate_img1();
 void Rotate_img2();
 void detectE();
+void display_menu();
 double Average();
 void mirror();
 void Merge();
@@ -33,9 +34,9 @@ void Shuffle();
 void Blur();
 int main ()
 {
-    int option1;
+    
    loadRGB();
-   
+display_menu();
    saveRGB();
 }
 void loadRGB()
@@ -50,6 +51,125 @@ void loadRGB()
    strcat (imageFileName, ".bmp");
    readRGBBMP(imageFileName, image);
 }
+ void display_menu()
+ {
+     char option;
+     int option1;
+
+     {
+     cout<<"choose a filter to apply or 0 to exit : "<<endl;
+     cout<<"1- Black & White Filter"<<endl;
+     cout<<"2- Invert Filter"<<endl;
+     cout<<"3- Merge Filter" <<endl;
+     cout<<"4- Flip Image" <<endl;
+     cout<<"5- Rotate Image"  <<endl;
+     cout<<"6- Darken and Lighten Image"<<endl;
+     cout<<"7- Detect Image Edges"<<endl;
+     cout<<"8- Enlarge Image"   <<endl;
+     cout<<"9- Shrink Image"   <<endl;
+     cout<<"a- Mirror 1/2 Image"  <<endl;
+     cout<<"b- Shuffle Image" <<endl;
+     cout<<"c- Blur Image"  <<endl;
+     cout<<"s- Save the image to a file"<<endl;
+     cout<<"0- Exit" <<endl;
+     cin >> option;
+     }
+     if (option == '1')
+     {      
+            Black_White_Filter();
+     }
+     else if (option == '2')
+      {     
+          Invert_Image();
+      }
+      else if (option == '3')
+     {      
+         load1();
+         Merge();
+     }
+      else if (option == '4')
+      {
+          cout<<"for horizontal flip press (1) for vertical flip press (2)"<<endl;
+          cin>>option1;
+          if(option1 == 1){
+            flip_h();
+          }
+          else if (option1 == 2){
+            flip_v();
+          }
+      }
+    else if (option == '5')
+     {
+         load1();
+         cout << "for rotating 90 deg press (1) for 180 deg press (2) and for 270 deg press(3)"<<endl;
+         cin >> option1 ;
+         if(option1 == 1)
+         {
+             Rotate_img();
+         }
+         else if(option1 == 2)
+         {
+             Rotate_img2();
+         }
+         else if(option1 == 3)
+         {
+             Rotate_img1();
+         }
+         saveRGB();
+     }
+      else if (option == '6')
+      {
+          cout<<"for darken press (1) and for lighten press (2)"<<endl;
+          cin >> option1;
+           if(option1 == 1){
+            darken();
+          }
+          else if (option1 == 2){
+            lighten();
+          }
+      }
+     else if (option == '7')
+     {  
+         Black_White_Filter();
+         detectE();
+         
+     }
+      else if (option == '8')
+      {
+           enlarge();
+           
+           
+      }
+     else if (option == '9')
+     {
+         Shrink();
+        
+
+     }
+      else if (option == 'a')
+     {
+         mirror();
+     }
+     else if (option == 'b')
+     {
+         Shuffle();
+     }
+     else if (option == 'c')
+     {
+         Blur();
+     }
+     else if (option == 's')
+     {
+         saveRGB();
+     }
+     else if (option == '0')
+     {
+        exit(0);
+     }
+     }
+
+
+
 void load1()
 {
    char imageFileName[100];
